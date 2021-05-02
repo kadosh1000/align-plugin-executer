@@ -1,0 +1,45 @@
+{
+  "name": "AlignExecuter",
+  "type": "executer",
+  "exposeRoute": false,
+  "execProgram": "node",
+  "main": "app.js",
+  "version": "1.0.0",
+  "description": "Selecting map to execute",
+  "settings":[
+    {
+      "name":"kaholoUrl",
+      "viewName":"Kaholo URL",
+      "type":"string"
+    }
+  ],
+  "methods": [
+    {
+      "name": "alignExecute",
+      "viewName": "Execute",
+      "params": [
+        {
+          "name": "alignEnvironment",
+          "viewName": "Environment",
+          "type": "string"
+        },
+        {
+          "name": "processes",
+          "viewName": "Processes obj",
+          "type": "string"
+        },
+        {
+          "name": "alignConfiguration",
+          "viewName": "Configuration obj",
+          "type": "string"
+        },
+        {
+          "name": "executeTrigger",
+          "viewName": "Execute Trigger",
+          "type": "string"
+        }
+      ]
+    }
+  ],
+  "imgUrl": "logo.png"
+}

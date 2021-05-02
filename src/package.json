@@ -1,0 +1,15 @@
+{
+  "name": "kaholo-plugin-execute-map",
+  "version": "1.2.0",
+  "description": "Selecting map to execute",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Kaholo Team",
+  "license": "ISC",
+  "dependencies": {
+    "request": "2.83.0",
+    "uuid": "^8.3.2"
+  }
+}
