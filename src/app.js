@@ -264,6 +264,10 @@ function getMessageJson(processes, configuration, trigger) {
 
 
 async function sendRequest(vhost, queue, message, kaholoUrl){
+  // return {
+  //   vhost, queue, message, url : `${kaholoUrl}/rabbitmq/webhook`
+  // }
+  
   var body = { 
     vhost : vhost, 
     queue : queue, 
@@ -274,7 +278,7 @@ async function sendRequest(vhost, queue, message, kaholoUrl){
     url:  `${kaholoUrl}/rabbitmq/webhook`,
     method: 'POST',
     json: true,
-    body : JSON.stringify(body)
+    body : body
   }
   
   return new Promise ((resolve,reject)=>{
@@ -306,9 +310,17 @@ async function alignExecute(action, settings){
 
   const vhost = action.params.alignEnvironment || "";
   
-  const queue = message.stage_1.stage;
+  const queue = action.params.alignQueue || message.stage_1.stage || message[message.current_stage].stage;
 
   return sendRequest(vhost,queue,message, settings.kaholoUrl);
+}
+
+async function alignPost(action, settings){
+  const vhost = action.params.alignEnvironment || "";
+  
+  const queue = action.params.alignQueue || message.stage_1.stage || message[message.current_stage].stage;
+
+  return sendRequest(vhost,queue, action.params.message, settings.kaholoUrl);
 }
 
 module.exports = {

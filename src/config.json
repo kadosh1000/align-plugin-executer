@@ -24,6 +24,11 @@
           "type": "string"
         },
         {
+          "name": "alignQueue",
+          "viewName": "Queue",
+          "type": "string"
+        },
+        {
           "name": "processes",
           "viewName": "Processes obj",
           "type": "string"
@@ -36,6 +41,27 @@
         {
           "name": "executeTrigger",
           "viewName": "Execute Trigger",
+          "type": "string"
+        }
+      ]
+    },
+    {
+      "name": "alignPost",
+      "viewName": "Post",
+      "params": [
+        {
+          "name": "alignEnvironment",
+          "viewName": "Environment",
+          "type": "string"
+        },
+        {
+          "name": "alignQueue",
+          "viewName": "Queue",
+          "type": "string"
+        },
+        {
+          "name": "message",
+          "viewName": "message",
           "type": "string"
         }
       ]
