@@ -325,4 +325,5 @@ async function alignPost(action, settings){
 
 module.exports = {
     alignExecute: alignExecute,
+    alignPost: alignPost
 };
