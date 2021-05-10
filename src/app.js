@@ -1,168 +1,6 @@
 const request = require("request");
 const uuidv4 = require("uuid").v4;
 
-/*const processes = {
-    "8b40a89e-a4b3-4e4f-9368-3e16c8ae228e": [
-        {
-            status: "done",
-            startNode: true,
-        },
-    ],
-    "795fc30c-eaa9-4b5d-966b-cd745a05313f": [
-        {
-            processId: "606dd6110212a5001866641b",
-            iterationIndex: 0,
-            status: "done",
-            uuid: "795fc30c-eaa9-4b5d-966b-cd745a05313f",
-            actions: {
-                "6087fa5ca2ab2d0035c83727": {
-                    retries: 0,
-                    mandatory: null,
-                    isEnabled: true,
-                    params: [
-                        {
-                            _id: "6087fa5ca2ab2d0035c83728",
-                            code: true,
-                            value: "wcm_admin_user()",
-                            param: "606e8faf0212a50018a2df7b",
-                            name: "username",
-                        },
-                        {
-                            _id: "6087fa5ca2ab2d0035c83729",
-                            code: true,
-                            value: "wcm_admin_password()",
-                            param: "606e8faf0212a50018a2df7c",
-                            name: "password",
-                        },
-                        {
-                            _id: "6087fa5ca2ab2d0035c8372a",
-                            code: null,
-                            value: "wcm_cr",
-                            param: "606e8faf0212a50018a2df7d",
-                            name: "wcm",
-                        },
-                    ],
-                    _id: "6087fa5ca2ab2d0035c83727",
-                    name: "Action #1 ",
-                    timeout: null,
-                    method: "Login",
-                    numParallel: null,
-                    actionExecutionId: "f1bfb41d-bf33-4598-a52a-35c5f5cf5bd0-1619524189394",
-                    action: "6087fa5ca2ab2d0035c83727",
-                    startTime: "2021-04-27T11:49:49.394Z",
-                    retriesLeft: 0,
-                    status: "success",
-                    result: {
-                        stdout: "+ wcm_global - Login: username: iterobiz-test1@aligntech.com, password: Dontusedefaultpassw0rds, wcm: wcm_cr",
-                        stderr: "",
-                        result: JSON.stringify({
-                            name: "Login",
-                            params: { user_name: "iterobiz-test1@aligntech.com", password: "Dontusedefaultpassw0rds", wcm: "wcm_cr" },
-                        }),
-                    },
-                    finishTime: "2021-04-27T11:49:49.454Z",
-                },
-                "6087fa5ca2ab2d0035c8372b": {
-                    retries: 0,
-                    mandatory: null,
-                    isEnabled: true,
-                    params: [
-                        {
-                            _id: "6087fa5ca2ab2d0035c8372c",
-                            code: null,
-                            value: "100",
-                            param: "606e8faf0212a50018a2df7f",
-                            name: "Manual_review_iCast",
-                        },
-                        {
-                            _id: "6087fa5ca2ab2d0035c8372d",
-                            code: null,
-                            value: "false",
-                            param: "606e8faf0212a50018a2df80",
-                            name: "Automatic_iCast",
-                        },
-                    ],
-                    _id: "6087fa5ca2ab2d0035c8372b",
-                    name: "Action #2 ",
-                    timeout: null,
-                    method: "Config_WCM_CR",
-                    numParallel: null,
-                    actionExecutionId: "26ada6f2-458d-44f7-bcda-893e1d05beb7-1619524189460",
-                    action: "6087fa5ca2ab2d0035c8372b",
-                    startTime: "2021-04-27T11:49:49.460Z",
-                    retriesLeft: 0,
-                    status: "success",
-                    result: {
-                        stdout: "+ wcm_global - Config_WCM_CR: Manual_review_iCast: 100, Automatic_iCast: false",
-                        stderr: "",
-                        result: JSON.stringify({ name: "Config_WCM_CR", params: { Automatic_iCast: false, Manual_review_iCast: 100 } }),
-                    },
-                    finishTime: "2021-04-27T11:49:49.512Z",
-                },
-            },
-            startTime: "2021-04-27T11:49:49.375Z",
-            processIndex: 0,
-            processName: "Process #1",
-            finishTime: "2021-04-27T11:49:49.518Z",
-        },
-    ],
-    "def14f53-1260-45ae-94ff-68117252a357": [
-        {
-            processId: "605c76b9bde46000114ecad8",
-            iterationIndex: 0,
-            status: "running",
-            uuid: "def14f53-1260-45ae-94ff-68117252a357",
-            actions: {
-                "6087fa5ca2ab2d0035c8370c": {
-                    retries: 0,
-                    mandatory: null,
-                    isEnabled: true,
-                    params: [
-                        {
-                            _id: "6087fa5ca2ab2d0035c8370d",
-                            code: true,
-                            value: "printProcesses()",
-                            param: null,
-                            name: "COMMANDS",
-                        },
-                    ],
-                    _id: "6087fa5ca2ab2d0035c8370c",
-                    name: "Action #1 ",
-                    timeout: null,
-                    method: "execute",
-                    numParallel: null,
-                    actionExecutionId: "831c8926-d72c-401f-bdbe-ca4027c61416-1619524189543",
-                    action: "6087fa5ca2ab2d0035c8370c",
-                    startTime: "2021-04-27T11:49:49.543Z",
-                    retriesLeft: 0,
-                    status: "running",
-                },
-            },
-            startTime: "2021-04-27T11:49:49.526Z",
-            processIndex: 1,
-            processName: "Process #2",
-        },
-    ],
-};
-
-const configuration = {
-    uuid: "",
-    uniqe_suffix: "",
-    name: "iCast_model_E2E",
-    order_id: "",
-    debug_report_name: "PPR_logs",
-    test: "ITEROBIZ-56501 - iCast full flow - EU region",
-    environment: "ppr",
-    unique_scanner: false,
-    scanner_agent_tags: "",
-    worker_number: 1,
-    json_folder: "",
-    current_stage: "stage_1",
-};
-
-const json = getMessageJson(processes,configuration,"");
-console.log(json);
-*/
 function getMessageJson(processes, configuration, trigger) {
     var index = 1;
     configuration.uuid = uuidv4();
@@ -207,16 +45,28 @@ function getMessageJson(processes, configuration, trigger) {
                 });
 
                 if (stage.startsWith("itero-lab") == true) {
-                    configuration[`stage_${index}`] = JSON.parse(`{"methods":[],"iterolab_methods":[]}`);
+                    configuration[`stage_${index}`] = {
+                        "methods":[],
+                        "iterolab_methods":[]
+                    };
                     configuration[`stage_${index}`]["methods"].push(methods.filter((e) => e.name == "Login")[0]);
                     configuration[`stage_${index}`]["methods"].push(methods.filter((e) => e.name == "OpenITeroLab")[0]);
 
                     methods.forEach((method) => {
-                        if (method.name != "Login" && method.name != "OpenITeroLab") configuration[`stage_${index}`]["iterolab_methods"].push(method);
+                        if (method.name != "Login" && method.name != "OpenITeroLab") 
+                            configuration[`stage_${index}`]["iterolab_methods"].push(method);
                     });
                 } else {
-                    configuration[`stage_${index}`] = JSON.parse(`{"methods":[]}`);
-                    configuration[`stage_${index}`]["methods"] = methods;
+                    methods.forEach(method=>{
+                        for(let param in method.params){
+                            if (!method.params[param] || method.params[param]==='null')
+                                method.params[param] = '';
+                        } 
+                    })
+
+                    configuration[`stage_${index}`]={
+                        "methods": methods
+                    }
                 }
 
                 //Add Stage fields
@@ -264,10 +114,6 @@ function getMessageJson(processes, configuration, trigger) {
 
 
 async function sendRequest(vhost, queue, message, kaholoUrl){
-  // return {
-  //   vhost, queue, message, url : `${kaholoUrl}/rabbitmq/webhook`
-  // }
-  
   var body = { 
     vhost : vhost, 
     queue : queue, 
@@ -327,3 +173,13 @@ module.exports = {
     alignExecute: alignExecute,
     alignPost: alignPost
 };
+
+/**
+ * The test data is in a seperate file to keep this file clean.
+ * Uncomment the code section to run tests.
+ */
+/*
+const { configuration, processes } = require('./test-data')
+const json = getMessageJson(processes,configuration,"");
+console.log(json);
+*/
