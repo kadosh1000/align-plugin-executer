@@ -14,6 +14,7 @@ function getMessageJson(processes, configuration, trigger) {
             var isBuildinBlockMandatory = "No";
 
             if (
+                stage.startsWith("MAT") || 
                 stage.startsWith("myitero") ||
                 stage.startsWith("myaligntech-actions") ||
                 stage.startsWith("wcm_global") ||
@@ -158,7 +159,9 @@ async function alignExecute(action, settings){
   
   const queue = action.params.alignQueue || message.stage_1.stage || message[message.current_stage].stage;
 
-  return sendRequest(vhost,queue,message, settings.kaholoUrl);
+  await sendRequest(vhost,queue,message, settings.kaholoUrl);
+  
+  return {uuid: message.uuid};
 }
 
 async function alignPost(action, settings){
@@ -178,8 +181,7 @@ module.exports = {
  * The test data is in a seperate file to keep this file clean.
  * Uncomment the code section to run tests.
  */
-/*
-const { configuration, processes } = require('./test-data')
+
+/*const { configuration, processes } = require('./test-data')
 const json = getMessageJson(processes,configuration,"");
-console.log(json);
-*/
+console.log(json);*/
