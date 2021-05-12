@@ -4,7 +4,7 @@
   "exposeRoute": false,
   "execProgram": "node",
   "main": "app.js",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Selecting map to execute",
   "settings":[
     {
@@ -42,6 +42,11 @@
           "name": "executeTrigger",
           "viewName": "Execute Trigger",
           "type": "string"
+        },
+        {
+          "name": "dryRun",
+          "viewName": "Dry Run",
+          "type": "boolean"
         }
       ]
     },

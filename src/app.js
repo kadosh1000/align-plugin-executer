@@ -159,7 +159,8 @@ async function alignExecute(action, settings){
   
   const queue = action.params.alignQueue || message.stage_1.stage || message[message.current_stage].stage;
 
-  await sendRequest(vhost,queue,message, settings.kaholoUrl);
+  if (action.params.dryRun !== true && action.params.dryRun !== 'true')
+    await sendRequest(vhost,queue,message, settings.kaholoUrl);
   
   return {uuid: message.uuid};
 }
