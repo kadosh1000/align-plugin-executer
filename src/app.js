@@ -11,6 +11,8 @@ function getMessageJson(processes, configuration, trigger) {
             if (!actions) return;
             
             var skey = Object.keys(processes[key][0]["actions"])[0];
+            if(!processes[key][0]["actions"][skey].result) return;
+            
             var pluginName = processes[key][0]["actions"][skey].result.stdout.split(' - ')[0].split('+ ')[1];
             // var pluginName = processes[key][0]["actions"][skey]["plugin"]["name"];
             var stage = pluginName;
