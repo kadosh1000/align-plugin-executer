@@ -7,6 +7,9 @@ function getMessageJson(processes, configuration, trigger) {
     configuration.trigger = trigger || "";
     Object.keys(processes).forEach((key) => {
         try {
+            const actions = processes[key][0]["actions"];
+            if (!actions) return;
+            
             var skey = Object.keys(processes[key][0]["actions"])[0];
             var pluginName = processes[key][0]["actions"][skey].result.stdout.split(' - ')[0].split('+ ')[1];
             // var pluginName = processes[key][0]["actions"][skey]["plugin"]["name"];
@@ -30,8 +33,16 @@ function getMessageJson(processes, configuration, trigger) {
                     if (tmp != undefined) {
                         isBuildinBlockMandatory = tmp;
                     }
+
+                    var tmpJson;
                     //Save Method Name and prameters
-                    var tmpJson = JSON.parse(processes[key][0]["actions"][skey]["result"]["result"]);
+                    try{
+                        tmpJson = JSON.parse(processes[key][0]["actions"][skey]["result"]["result"]);
+                    } catch(err){
+                        throw `Could not parse action ${processes[key][0]["actions"][skey].name} on ${processes[key][0].processName}: ${err}`;
+                    }
+                    
+                    
                     //Add retires from current action
                     tmpJson.retries = processes[key][0]["actions"][skey]["retries"] == 0 ? 1 : processes[key][0]["actions"][skey]["retries"];
                     //Add mandatory from current action
@@ -104,6 +115,7 @@ function getMessageJson(processes, configuration, trigger) {
                 index++;
             }
         } catch (err) {
+            // console.error(err);
             //configuration.Error =  err;
         }
     });
@@ -183,6 +195,6 @@ module.exports = {
  * Uncomment the code section to run tests.
  */
 
-/*const { configuration, processes } = require('./test-data')
-const json = getMessageJson(processes,configuration,"");
-console.log(json);*/
+// const { configuration, processes } = require('./test-data')
+// const json = getMessageJson(processes,configuration,"");
+// console.log(json);
