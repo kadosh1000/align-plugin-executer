@@ -196,6 +196,6 @@ module.exports = {
  * Uncomment the code section to run tests.
  */
 
-const { configuration, processes } = require('./test-data')
-const json = getMessageJson(processes,configuration,"");
-console.log(json);
+// const { configuration, processes } = require('./test-data')
+// const json = getMessageJson(processes,configuration,"");
+// console.log(json);
