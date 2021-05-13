@@ -39,7 +39,7 @@ function getMessageJson(processes, configuration, trigger) {
                     try{
                         tmpJson = JSON.parse(processes[key][0]["actions"][skey]["result"]["result"]);
                     } catch(err){
-                        throw `Could not parse action ${processes[key][0]["actions"][skey].name} on ${processes[key][0].processName}: ${err}`;
+                        throw `Could not parse action '${processes[key][0]["actions"][skey].name}' on '${processes[key][0].processName}': ${err}`;
                     }
                     
                     
@@ -115,6 +115,7 @@ function getMessageJson(processes, configuration, trigger) {
                 index++;
             }
         } catch (err) {
+            throw err;
             // console.error(err);
             //configuration.Error =  err;
         }
@@ -195,6 +196,6 @@ module.exports = {
  * Uncomment the code section to run tests.
  */
 
-// const { configuration, processes } = require('./test-data')
-// const json = getMessageJson(processes,configuration,"");
-// console.log(json);
+const { configuration, processes } = require('./test-data')
+const json = getMessageJson(processes,configuration,"");
+console.log(json);
