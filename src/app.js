@@ -72,6 +72,11 @@ function getMessageJson(processes, configuration, trigger) {
                     });
                 } else {
                     methods.forEach(method=>{
+                        for (let key in method){
+                            if(method[key] === 'null' || method[key] === null){
+                                method[key] = '';
+                            }
+                        }
                         for(let param in method.params){
                             if (!method.params[param] || method.params[param]==='null')
                                 method.params[param] = '';
