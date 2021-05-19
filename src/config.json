@@ -4,7 +4,7 @@
   "exposeRoute": false,
   "execProgram": "node",
   "main": "app.js",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "description": "Selecting map to execute",
   "settings":[
     {

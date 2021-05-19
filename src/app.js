@@ -72,11 +72,7 @@ function getMessageJson(processes, configuration, trigger) {
                     });
                 } else {
                     methods.forEach(method=>{
-                        for (let key in method){
-                            if(method[key] === 'null' || method[key] === null){
-                                method[key] = '';
-                            }
-                        }
+                        method = formatEmptyFields(method);
                         for(let param in method.params){
                             if (!method.params[param] || method.params[param]==='null')
                                 method.params[param] = '';
@@ -106,6 +102,8 @@ function getMessageJson(processes, configuration, trigger) {
                 //Old code taking only first action
                 var actionJson = JSON.parse(processes[key][0]["actions"][skey]["result"]["result"]);
 
+                actionJson = formatEmptyFields(actionJson);
+
                 //Add new stage
                 configuration[`stage_${index}`] = actionJson;
 
@@ -131,6 +129,15 @@ function getMessageJson(processes, configuration, trigger) {
     //last step goes to report queue
     configuration[`stage_${index - 1}`].next_step = "reports";
     return configuration;
+}
+
+function formatEmptyFields(obj){
+    for (let key in obj){
+        if(obj[key] === 'null' || obj[key] === null){
+            obj[key] = '';
+        }
+    }
+    return obj;
 }
 
 
