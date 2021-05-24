@@ -24,6 +24,7 @@ function getMessageJson(processes, configuration, trigger) {
                 stage.startsWith("myaligntech-actions") ||
                 stage.startsWith("wcm_global") ||
                 stage.startsWith("db") ||
+                stage.startsWith("sfdc") ||
                 stage.startsWith("itero-lab")
             ) {
                 // this code taking multipile actions int the json
